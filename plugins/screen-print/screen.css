@@ -1,0 +1,12 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+tr.no-border td{
+    border: 0 !important;
+    /* zoom: 1; */
+}
+
+tr.ok-border td{
+    border: 1px solid black;
+}
