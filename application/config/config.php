@@ -24,16 +24,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = '';
-// $config['base_url'] = 'http://192.168.10.22/GI-ProductionReport1/';
-// $config['base_url'] = 'http://192.168.10.61/GI-ProductionReport1/';
-// $config['base_url'] = 'http://localhost:8080/GI-ProductionReport1/';
-// $config['base_url'] = 'http://192.168.10.85/GI-ProductionReport1/';
-// $config['base_url'] = 'http://192.168.10.3/GI-ProductionReport1/';
-// $config['base_url'] = 'http://192.168.10.5/GI-ProductionReport1-updated/';
 
 // $config['base_url'] = 'http://192.168.10.6/GI-ProductionReport1/';
-$config['base_url'] = 'http://gi-pr.local/';
-// $config['base_url'] = 'http://127.0.0.1/GI-ProductionReport2/';
+$config['base_url'] = 'http://192.168.10.81/GI-ProductionReport1/';
+// $config['base_url'] = 'http://gi-pr.local/';
 
 /*
 |--------------------------------------------------------------------------

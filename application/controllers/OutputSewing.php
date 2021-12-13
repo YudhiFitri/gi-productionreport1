@@ -110,7 +110,7 @@ class OutputSewing extends CI_Controller
 				$rowAffected = $this->OutputSewingModel->updateOutputSewing($dataStr);
 
 				echo json_encode($rowAffected);
-			}			
+			}
 		}
 
 		// echo json_encode($rst);
@@ -278,5 +278,12 @@ class OutputSewing extends CI_Controller
 		$rst = $this->OutputSewingDetailModel->get_by_barcode($barcode);
 
 		echo json_encode($rst);
+	}
+
+	public function ajax_get_group_line_by_barcode($barcode)
+	{
+		$data = $this->InputSewingModel->get_group_line_by_barcode($barcode);
+
+		echo json_encode($data);
 	}
 }

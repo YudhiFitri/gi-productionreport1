@@ -210,4 +210,13 @@ class InputSewingModel extends CI_Model
 
 		return $this->db->affected_rows();
 	}
+
+	public function get_group_line_by_barcode($code)
+	{
+
+		$data['row'] = $this->db->get_where($this->table, array('kode_barcode' => $code))->row();
+		$data['groupLine'] = $this->db->get_where('line', ['name' => $data['row']->line])->row()->location;
+
+		return $data;
+	}
 }

@@ -220,8 +220,10 @@
 		const regBarcodeMekanik = /MK-\d{6}/; //regex barcode mekanik member
 		const regBarcodeMesin = /\d{10}/ //regex barcode mesin
 		const regMasalahMesin = /MM-\d{3}/ //regex masalah mesin
+		const groupLocation = '<?= $this->session->userdata("group_location"); ?>';
 
 		$(document).ready(function() {
+			console.log('groupLocation: ', groupLocation);
 			var code = "";
 			var codeSplit;
 			var userName = "<?php echo $this->session->userdata['username']; ?>";
@@ -231,19 +233,19 @@
 				type: "GET",
 				dataType: "json"
 			}).done(function(dt) {
-				console.log('dt: ', dt);				
+				console.log('dt: ', dt);
 				if (dt == null) {
 					$('#modal_man_power').modal({
 						backdrop: 'static',
 						keyboard: false,
 						show: true
 					});
-					$('#modal_man_power').modal('show');					
-				}else{
+					$('#modal_man_power').modal('show');
+				} else {
 					idOutputSewing = dt.id_output_sewing;
 					console.log('idOutputSewing:', idOutputSewing);
 				}
-			});			
+			});
 
 			// const Scanning = require('./js/barcodeScanning');
 
@@ -321,26 +323,25 @@
 					"type": "POST",
 					"dataType": "json",
 				},
-				columnDefs:[
-					{
+				columnDefs: [{
 						targets: [0],
 						visible: false
 					},
 					{
 						targets: [3, 5, 6],
 						className: 'text-center'
-					}					
+					}
 				]
 				// "createdRow": function(row, data, dataIndex) {
-					// if (data[3] == '00:00:00') {
-					// 	$('td', row).eq(3).css('color', 'red');
-					// }
-					// if (data[4] == '00:00:00') {
-					// 	$('td', row).eq(4).css('color', 'red');
-					// }
-					// if (data[5] == '00:00:00') {
-					// 	$('td', row).eq(5).css('color', 'red');
-					// }
+				// if (data[3] == '00:00:00') {
+				// 	$('td', row).eq(3).css('color', 'red');
+				// }
+				// if (data[4] == '00:00:00') {
+				// 	$('td', row).eq(4).css('color', 'red');
+				// }
+				// if (data[5] == '00:00:00') {
+				// 	$('td', row).eq(5).css('color', 'red');
+				// }
 				// 	if (data[6] == '00:00:00') {
 				// 		$('td', row).eq(6).css('color', 'red');
 				// 	}
@@ -792,9 +793,73 @@
 						$('#bundle_barcode').focus();
 					} else {
 						//cek di output sewing detail
-						checkBarcodeForTheLine(barcode);
+						// checkBarcodeForTheLine(barcode);
+						checkBarcodeForTheGroupLine(barcode);
+
 					}
 				});
+			}
+
+			function checkBarcodeForTheGroupLine(code) {
+				var ajaxcheckBarcodeForTheGroupLine = $.ajax({
+					type: 'GET',
+					url: '<?= site_url("OutputSewing/ajax_get_group_line_by_barcode") ?>/' + code,
+					dataType: 'json'
+				});
+
+				ajaxcheckBarcodeForTheGroupLine.done(function(data) {
+					if (data != null) {
+						console.log('data: ', data);
+						console.log('groupLocation: ', groupLocation);
+						if (data.groupLine != groupLocation) {
+							Swal.fire({
+								type: 'warning',
+								title: 'Warning',
+								html: `<p><strong>Barcode ini bukan untuk zona ${groupLocation}</strong></p>`,
+								showConfirmButton: false,
+								timer: 1750
+							});
+							$('#bundle_barcode').val('');
+							$('#bundle_barcode').focus();
+						} else {
+							$.ajax({
+								type: 'GET',
+								url: '<?= site_url("OutputSewing/ajax_get_output_sewing_detail_by_barcode"); ?>/' + code,
+								dataType: 'json'
+							}).done(function(retData) {
+								var totQtyOutputSewingDetail = 0;
+
+								$.each(retData, function(i, item) {
+									totQtyOutputSewingDetail += parseInt(item.qty);
+								});
+
+								console.log('totQtyOutputSewingDetail: ', totQtyOutputSewingDetail);
+								console.log('data.row.qty_pcs: ', data.row.qty_pcs);
+
+								if (totQtyOutputSewingDetail > 0 && totQtyOutputSewingDetail >= parseInt(data.row.qty_pcs)) {
+									Swal.fire({
+										type: 'warning',
+										title: 'Warning',
+										html: `<p><strong>Barcode ini sudah di scan!!</strong></p>`,
+										showConfirmButton: true,
+										// timer: 750,
+										onAfterClose: () => {
+											$('#modal_edit_qty').modal('hide');
+											$('#bundle_barcode').val('');
+											$('#bundle_barcode').focus();
+										}
+									});
+								} else if (totQtyOutputSewingDetail > 0 && totQtyOutputSewingDetail < parseInt(data.row.qty_pcs)) {
+									qtyMax = parseInt(data.row.qty_pcs) - totQtyOutputSewingDetail;
+								} else if (totQtyOutputSewingDetail <= 0) {
+									qtyMax = parseInt(data.row.qty_pcs);
+								}
+								data.row.qtyPcsMax = qtyMax;
+								showOutputSewingModal(data.row);
+							});
+						}
+					}
+				})
 			}
 
 			function checkBarcodeForTheLine(kode) {
@@ -877,7 +942,7 @@
 									qtyMax = parseInt(d.qty_pcs);
 								}
 								d.qtyPcsMax = qtyMax;
-								showOutputSewingModal(d);								
+								showOutputSewingModal(d);
 							});
 						}
 					}
@@ -954,7 +1019,7 @@
 				// 	keyboard: false,
 				// 	show: true
 				// });
-                console.log('dtI: ', dtI);
+				console.log('dtI: ', dtI);
 				$('#modal_edit_qty').on('shown.bs.modal', function(e) {
 					$('#qtyOutputSewing').attr('min', '1');
 					$('#qtyOutputSewing').attr('max', dtI.qtyPcsMax);
@@ -976,7 +1041,7 @@
 
 			$('#btnSaveQtyOutputSewing').click(function(e) {
 				e.preventDefault();
-				
+
 				let qtyPcsActual = $('#qtyOutputSewing').val();
 
 				console.log(qtyPcsActual);
@@ -1015,7 +1080,7 @@
 								$('#modal_edit_qty').modal('hide');
 							}
 						});
-					}else{
+					} else {
 						Swal.fire({
 							type: 'warning',
 							title: 'Peringatan',
@@ -1026,7 +1091,7 @@
 								$('#bundle_barcode').focus();
 								$('#modal_edit_qty').modal('hide');
 							}
-						});						
+						});
 					}
 				})
 			}
