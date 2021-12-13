@@ -75,19 +75,19 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => '192.168.10.3',
+	'hostname' => '192.168.10.3',
 
 	// 'hostname' => '192.168.10.81',
-	'hostname' => 'localhost',
+	// 'hostname' => 'localhost',
 
-	'username' => 'root',
+	// 'username' => 'root',
 
-	// 'username' => 'manager',
+	'username' => 'manager',
 	// 'password' => 'password',
-	'password' => '',
-	//'password' => 'Intimates@2020',	
+	// 'password' => '',
+	// 'password' => 'Intimates@2020',	
 
-	// 'password' => '@Gl0b4l1nd0',	
+	'password' => '@Gl0b4l1nd0',
 	'database' => 'productionreport',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
