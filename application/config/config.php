@@ -28,7 +28,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // $config['base_url'] = 'http://192.168.10.6/GI-ProductionReport1/';
 // $config['base_url'] = 'http://192.168.10.81/gi-productionreport1/';
 // $config['base_url'] = 'http://gi-pr.local/';
-$config['base_url'] = 'http://gi-productionreport1/';
+$config['base_url'] = 'http://www.gi-productionreport1/';
 
 /*
 |--------------------------------------------------------------------------
