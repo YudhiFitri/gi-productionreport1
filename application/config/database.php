@@ -85,9 +85,9 @@ $db['default'] = array(
 	'username' => 'manager',
 	// 'password' => 'password',
 	// 'password' => '',
-	// 'password' => 'Intimates@2020',	
+	'password' => 'Intimates@2020',
 
-	'password' => '@Gl0b4l1nd0',
+	// 'password' => '@Gl0b4l1nd0',
 	'database' => 'productionreport',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
