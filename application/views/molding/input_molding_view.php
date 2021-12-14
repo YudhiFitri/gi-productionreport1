@@ -126,7 +126,7 @@
 				"serverSide": true,
 				"order": [],
 				"ajax": {
-					"url": "<?php echo site_url('inputmolding/ajax_list'); ?>",
+					"url": "<?php echo site_url('InputMolding/ajax_list'); ?>",
 					"type": "POST",
 					"dataType": "json",
 				},
@@ -175,12 +175,12 @@
 				}
 			});
 
-			function saveData(code){
+			function saveData(code) {
 				$.ajax({
-					url: '<?php echo site_url("inputmolding/ajax_save_data"); ?>/' + code,
+					url: '<?php echo site_url("InputMolding/ajax_save_data"); ?>/' + code,
 					type: 'POST',
 					dataType: 'json',
-					success: function(dt){
+					success: function(dt) {
 						console.log('dt: ', dt);
 						Swal.fire({
 							type: (dt.success == true ? 'success' : 'warning'),
@@ -189,7 +189,7 @@
 							showConfirmButton: false,
 							timer: 1750
 						});
-						if(dt.success == true){
+						if (dt.success == true) {
 							reload_table();
 						}
 						$('#barcode_input_molding').val('');
@@ -198,903 +198,903 @@
 				})
 			}
 
-		// 	function check_barcode_outer(code) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_outermold_at_detail_cutting'); ?>/" + code,
-		// 			type: 'GET',
-		// 			dataType: 'json',
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(retVal) {
-		// 			console.log('retVal: ', retVal);
-		// 			if (retVal == 0) {
-
-		// 				Swal.fire({
-		// 					type: 'warning',
-		// 					title: 'Warning!',
-		// 					text: 'This BARCODE not found!',
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				check_barcode_outer1(code);
-		// 			}
-		// 		});
-		// 	}
-
-		// 	function check_barcode_outer1(c) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_outermold_barcode'); ?>/" + c,
-		// 			type: "GET",
-		// 			dataType: "json",
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(dt) {
-		// 			if (dt == 0) {
-		// 				Swal.fire({
-		// 					type: "warning",
-		// 					title: "Warning",
-		// 					text: "This barcode already scanned!",
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				// save_input_molding(dt);
-		// 				checkOrc(dt);
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function check_barcode_mid(code) {
-		// 		console.log('code: ', code);
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_midmold_at_detail_cutting'); ?>/" + code,
-		// 			type: 'GET',
-		// 			dataType: 'json',
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(retVal) {
-
-		// 			if (retVal == 0) {
-		// 				console.log('retVal: ', retVal);
-		// 				Swal.fire({
-		// 					type: 'warning',
-		// 					title: 'Warning!',
-		// 					text: 'This BARCODE not found!',
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				check_barcode_mid1(code);
-		// 			}
-		// 		});
-		// 	}
-
-		// 	function check_barcode_mid1(c) {
-		// 		console.log('c :', c);
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_midmold_barcode'); ?>/" + c,
-		// 			type: "GET",
-		// 			dataType: "json",
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(dt) {
-		// 			if (dt == 0) {
-		// 				Swal.fire({
-		// 					type: "warning",
-		// 					title: "Warning",
-		// 					text: "This barcode already scanned!",
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				// save_input_molding(dt);
-		// 				checkOrc(dt);
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function check_barcode_linning(code) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_linningmold_at_detail_cutting'); ?>/" + code,
-		// 			type: 'GET',
-		// 			dataType: 'json',
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(retVal) {
-		// 			if (retVal == 0) {
-		// 				Swal.fire({
-		// 					type: 'warning',
-		// 					title: 'Warning!',
-		// 					text: 'This BARCODE not found!',
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				check_barcode_linning1(code);
-		// 			}
-		// 		});
-		// 	}
-
-		// 	function check_barcode_linning1(c) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_check_linningmold_barcode'); ?>/" + c,
-		// 			type: "GET",
-		// 			dataType: "json",
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(dt) {
-		// 			console.log('dt: ', dt);
-		// 			if (dt == 0) {
-		// 				Swal.fire({
-		// 					type: "warning",
-		// 					title: "Warning",
-		// 					text: "This barcode already scanned!",
-		// 					showConfirmButton: false,
-		// 					timer: 1750
-		// 				});
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 			} else {
-		// 				// save_input_molding(dt);
-		// 				checkOrc(dt);
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function checkOrc(data) {
-		// 		var dt = {
-		// 			'orc': data.orc,
-		// 			'no_bundle': data.no_bundle
-		// 		};
-
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_cek_by_orc_nobundle'); ?>",
-		// 			type: "POST",
-		// 			data: {
-		// 				'dataStr': dt
-		// 			},
-		// 			dataType: "json",
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(retVal) {
-		// 			console.log('last query :', retVal);
-		// 			if (retVal == 0) {
-		// 				save_input_molding(data);
-		// 			} else {
-		// 				update_detail_input_molding(data);
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function save_input_molding(data) {
-
-		// 		var dataStr = {
-		// 			'orc': data.orc,
-		// 			'style': data.style,
-		// 			'color': data.color,
-		// 		};
-
-		// 		$.ajax({
-		// 			url: '<//?php echo site_url("inputmolding/ajax_save"); ?>',
-		// 			data: {
-		// 				'dataStr': dataStr
-		// 			},
-		// 			method: 'post',
-		// 			dataType: 'json',
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(id_inserted) {
-		// 			if (id_inserted > 0) {
-		// 				var brcode = $('#barcode_input_molding').val()
-		// 				saveDetail(data, brcode, id_inserted);
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function update_detail_input_molding(dt) {
-		// 		var dataStr = {
-		// 			'orc': dt.orc,
-		// 			'no_bundle': dt.no_bundle
-		// 		};
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_get_by_orc_nobundle'); ?>",
-		// 			type: "POST",
-		// 			data: {
-		// 				"dataStr": dataStr
-		// 			},
-		// 			dataType: "json",
-		// 			timeout: 1000,
-		// 			error: function(request, status, err) {
-		// 				if (status == "timeout") {
-		// 					$.ajax(this);
-		// 				}
-		// 			}
-		// 		}).done(function(d) {
-		// 			if (d != null) {
-		// 				var kode = $('#barcode_input_molding').val();
-		// 				updateDetail(d, kode);
-		// 			}
-		// 		});
-
-		// 	}
-
-		// 	function updateDetail(d, kode) {
-		// 		var prfx = kode.charAt(0);
-
-		// 		switch (prfx) {
-		// 			case "O":
-		// 				updateOuterMold(d, kode);
-		// 				break;
-		// 			case "M":
-		// 				updateMidMold(d, kode);
-		// 				break;
-		// 			case "L":
-		// 				updateLinningMold(d, kode);
-		// 				break;
-		// 		}
-		// 	}
-
-		// 	function updateOuterMold(data, code) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForOuterMoldSAM;
-
-		// 		var ajaxGetOuterMoldSAM;
-
-		// 		var outerMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-
-		// 			}),
-		// 			ajaxGetOuterMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForOuterMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_outermold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForOuterMoldSAM': dataForOuterMoldSAM
-		// 					},
-		// 					dataType: 'json',
-		// 					timeout: 1000,
-		// 					error: function(request, status, err) {
-		// 						if (status == "timeout") {
-		// 							$.ajax(this);
-		// 						}
-		// 					}
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetOuterMoldSAM.done(function(d) {
-		// 			// outerMoldSAM = d.outer_sam;
-		// 			outerMoldSAM = d.total_mold_sam;
-		// 			var dataOuterMold = {
-		// 				'id_input_molding': data.id_input_molding,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'outermold_sam': outerMoldSAM,
-		// 				'outermold_barcode': code
-		// 			}
-		// 			// insertOuterMold(dataOuterMold);
-		// 			$.ajax({
-		// 				url: "<//?php echo site_url('inputmolding/ajax_update_outer_mold'); ?>",
-		// 				type: "POST",
-		// 				data: {
-		// 					'dataOuterMold': dataOuterMold
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}).done(function(dt) {
-		// 				if (dt > 0) {
-		// 					Swal.fire({
-		// 						type: 'info',
-		// 						title: 'Update Data Molding Success!!',
-		// 						showConfirmButton: false,
-		// 						timer: 1500
-		// 					});
-
-		// 					$('#barcode_input_molding').val('');
-		// 					$('#barcode_input_molding').focus();
-		// 					reload_table();
-		// 				}
-		// 			})
-		// 		});
-		// 	}
-
-		// 	function updateMidMold(data, code) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForMidMoldSAM;
-
-		// 		var ajaxGetMidMoldSAM;
-
-		// 		var midMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}),
-		// 			ajaxGetMidMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForMidMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_midmold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForMidMoldSAM': dataForMidMoldSAM
-		// 					},
-		// 					dataType: 'json',
-		// 					timeout: 1000,
-		// 					error: function(request, status, err) {
-		// 						if (status == "timeout") {
-		// 							$.ajax(this);
-		// 						}
-		// 					}
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetMidMoldSAM.done(function(d) {
-		// 			midMoldSAM = d.mid_sam;
-		// 			console.log('data.id_input_molding :', data.id_input_molding);
-		// 			var dataMidMold = {
-		// 				'id_input_molding': data.id_input_molding,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'mildmold_sam': midMoldSAM,
-		// 				'midmold_barcode': code
-		// 			}
-		// 			// insertOuterMold(dataOuterMold);
-		// 			$.ajax({
-		// 				url: "<//?php echo site_url('inputmolding/ajax_update_mid_mold'); ?>",
-		// 				type: "POST",
-		// 				data: {
-		// 					'dataMidMold': dataMidMold
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}).done(function(dt) {
-		// 				if (dt > 0) {
-		// 					Swal.fire({
-		// 						type: 'info',
-		// 						title: 'Update Data Molding Success!!',
-		// 						showConfirmButton: false,
-		// 						timer: 1500
-		// 					});
-
-		// 					$('#barcode_input_molding').val('');
-		// 					$('#barcode_input_molding').focus();
-		// 					reload_table();
-		// 				}
-		// 			})
-		// 		});
-		// 	}
-
-		// 	function updateLinningMold(data, code) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForLinningMoldSAM;
-
-		// 		var ajaxGetLinningMoldSAM;
-
-		// 		var linningMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}),
-		// 			ajaxGetLinningMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForLinningMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-
-
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_linningmold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForLinningMoldSAM': dataForLinningMoldSAM
-		// 					},
-		// 					dataType: 'json',
-		// 					timeout: 1000,
-		// 					error: function(request, status, err) {
-		// 						if (status == "timeout") {
-		// 							$.ajax(this);
-		// 						}
-		// 					}
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetLinningMoldSAM.done(function(d) {
-		// 			linningMoldSAM = d.linning_sam;
-		// 			var dataLinningMold = {
-		// 				'id_input_molding': data.id_input_molding,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'mildmold_sam': linningMoldSAM,
-		// 				'linningmold_barcode': code
-		// 			}
-		// 			// insertOuterMold(dataOuterMold);
-		// 			$.ajax({
-		// 				url: "<//?php echo site_url('inputmolding/ajax_update_linning_mold'); ?>",
-		// 				type: "POST",
-		// 				data: {
-		// 					'dataLinningMold': dataLinningMold
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}).done(function(dt) {
-		// 				if (dt > 0) {
-		// 					Swal.fire({
-		// 						type: 'info',
-		// 						title: 'Update Data Molding Success!!',
-		// 						showConfirmButton: false,
-		// 						timer: 1500
-		// 					});
-
-		// 					$('#barcode_input_molding').val('');
-		// 					$('#barcode_input_molding').focus();
-		// 					reload_table();
-		// 				}
-		// 			})
-		// 		});
-		// 	}
-
-		// 	function saveDetail(dt, b, idInputMolding) {
-		// 		var preffix = b.charAt(0);
-
-		// 		switch (preffix) {
-		// 			case "O":
-		// 				saveOuterMold(dt, b, idInputMolding);
-		// 				break;
-		// 			case "M":
-		// 				saveMidMold(dt, b, idInputMolding);
-		// 				break;
-		// 			case "L":
-		// 				saveLinningMold(dt, b, idInputMolding);
-		// 				break;
-		// 		}
-		// 	}
-
-		// 	function saveOuterMold(data, bar, id) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForOuterMoldSAM;
-
-		// 		var ajaxGetOuterMoldSAM;
-
-		// 		var outerMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}),
-		// 			ajaxGetOuterMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForOuterMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-		// 				console.log('dataForOuterMoldSAM: ', dataForOuterMoldSAM);
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_outermold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForOuterMoldSAM': dataForOuterMoldSAM
-		// 					},
-		// 					dataType: 'json',
-		// 					timeout: 1000,
-		// 					error: function(request, status, err) {
-		// 						if (status == "timeout") {
-		// 							$.ajax(this);
-		// 						}
-		// 					}
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetOuterMoldSAM.done(function(d) {
-		// 			outerMoldSAM = d.outer_sam;
-		// 			var dataOuterMold = {
-		// 				'id_input_molding': id,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'outermold_sam': outerMoldSAM,
-		// 				'outermold_barcode': bar
-		// 			}
-		// 			insertOuterMold(dataOuterMold);
-		// 		});
-		// 	}
-
-		// 	function saveMidMold(data, bar, id) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForMidMoldSAM;
-
-		// 		var ajaxGetMidMoldSAM;
-
-		// 		var midMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json',
-		// 				timeout: 1000,
-		// 				error: function(request, status, err) {
-		// 					if (status == "timeout") {
-		// 						$.ajax(this);
-		// 					}
-		// 				}
-		// 			}),
-		// 			ajaxGetMidMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForMidMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-		// 				console.log('dataForMidMoldSAM: ', dataForMidMoldSAM);
-		// 				// console.log('dataForCuttingSAM: ', dataForCuttingSAM);
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_midmold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForMidMoldSAM': dataForMidMoldSAM
-		// 					},
-		// 					dataType: 'json'
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetMidMoldSAM.done(function(d) {
-		// 			midMoldSAM = d.mid_sam;
-		// 			var dataMidMold = {
-		// 				'id_input_molding': id,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'midmold_sam': midMoldSAM,
-		// 				'midmold_barcode': bar
-		// 			}
-		// 			// console.log('dataCuttingDetail: ', dataCuttingDetail);
-		// 			insertMidMold(dataMidMold);
-		// 		});
-		// 	}
-
-		// 	function saveLinningMold(data, bar, id) {
-		// 		var color = data.color;
-		// 		var groupSize;
-
-		// 		if (color.includes("BLACK") == true) {
-		// 			colorGroup = "Black";
-		// 		} else if (color.includes("WHITE") == true) {
-		// 			colorGroup = "White";
-		// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
-		// 			colorGroup = "color"
-		// 		}
-
-		// 		var style = data.style;
-
-		// 		var ajaxGetGroupSize;
-
-		// 		var dataForLinningMoldSAM;
-
-		// 		var ajaxGetLinningMoldSAM;
-
-		// 		var linningMoldSAM;
-
-		// 		ajaxGetGroupSize = $.ajax({
-		// 				url: '<//?php echo site_url('inputmolding/ajax_get_by_size'); ?>',
-		// 				type: 'POST',
-		// 				data: {
-		// 					'dataSize': data.size
-		// 				},
-		// 				dataType: 'json'
-		// 			}),
-		// 			ajaxGetLinningMoldSAM = ajaxGetGroupSize.then(function(dt) {
-		// 				groupSize = dt.group;
-
-		// 				dataForLinningMoldSAM = {
-		// 					'style': style,
-		// 					'color': colorGroup,
-		// 					'grup_size': groupSize
-		// 				};
-		// 				// console.log('dataForCuttingSAM: ', dataForCuttingSAM);
-		// 				return $.ajax({
-		// 					url: '<//?php echo site_url("inputmolding/ajax_get_Linningmold_sam"); ?>',
-		// 					type: 'POST',
-		// 					data: {
-		// 						'dataForLinningMoldSAM': dataForLinningMoldSAM
-		// 					},
-		// 					dataType: 'json'
-		// 				});
-
-		// 			});
-
-		// 		ajaxGetLinningMoldSAM.done(function(d) {
-		// 			linningMoldSAM = d.linning_sam;
-		// 			var dataLinningMold = {
-		// 				'id_input_molding': id,
-		// 				'no_bundle': data.no_bundle,
-		// 				'size': data.size,
-		// 				'group_size': groupSize,
-		// 				'qty_pcs': data.qty_pcs,
-		// 				'linningmold_sam': linningMoldSAM,
-		// 				'linningmold_barcode': bar
-		// 			}
-		// 			// console.log('dataCuttingDetail: ', dataCuttingDetail);
-		// 			insertLinningMold(dataLinningMold);
-		// 		});
-		// 	}
-
-		// 	function insertOuterMold(data) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_save_outer_mold'); ?>",
-		// 			type: "POST",
-		// 			data: {
-		// 				'dataOuterMold': data
-		// 			},
-		// 			dataType: 'json',
-		// 		}).done(function(dt) {
-		// 			if (dt > 0) {
-		// 				Swal.fire({
-		// 					type: 'info',
-		// 					title: 'Save Data Success!!',
-		// 					showConfirmButton: false,
-		// 					timer: 1500
-		// 				});
-
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 				reload_table();
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function insertMidMold(data) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_save_mid_mold'); ?>",
-		// 			type: "POST",
-		// 			data: {
-		// 				'dataMidMold': data
-		// 			},
-		// 			dataType: 'json',
-		// 		}).done(function(dt) {
-		// 			if (dt > 0) {
-		// 				Swal.fire({
-		// 					type: 'info',
-		// 					title: 'Save Data Success!!',
-		// 					showConfirmButton: false,
-		// 					timer: 1500
-		// 				});
-
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 				reload_table();
-		// 			}
-		// 		})
-		// 	}
-
-		// 	function insertLinningMold(data) {
-		// 		$.ajax({
-		// 			url: "<//?php echo site_url('inputmolding/ajax_save_linning_mold'); ?>",
-		// 			type: "POST",
-		// 			data: {
-		// 				'dataLinningMold': data
-		// 			},
-		// 			dataType: 'json',
-		// 		}).done(function(dt) {
-		// 			if (dt > 0) {
-		// 				Swal.fire({
-		// 					type: 'info',
-		// 					title: 'Save Data Success!!',
-		// 					showConfirmButton: false,
-		// 					timer: 1500
-		// 				});
-
-		// 				$('#barcode_input_molding').val('');
-		// 				$('#barcode_input_molding').focus();
-		// 				reload_table();
-		// 			}
-		// 		})
-		// 	}
+			// 	function check_barcode_outer(code) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_outermold_at_detail_cutting'); ?>/" + code,
+			// 			type: 'GET',
+			// 			dataType: 'json',
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(retVal) {
+			// 			console.log('retVal: ', retVal);
+			// 			if (retVal == 0) {
+
+			// 				Swal.fire({
+			// 					type: 'warning',
+			// 					title: 'Warning!',
+			// 					text: 'This BARCODE not found!',
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				check_barcode_outer1(code);
+			// 			}
+			// 		});
+			// 	}
+
+			// 	function check_barcode_outer1(c) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_outermold_barcode'); ?>/" + c,
+			// 			type: "GET",
+			// 			dataType: "json",
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(dt) {
+			// 			if (dt == 0) {
+			// 				Swal.fire({
+			// 					type: "warning",
+			// 					title: "Warning",
+			// 					text: "This barcode already scanned!",
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				// save_input_molding(dt);
+			// 				checkOrc(dt);
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function check_barcode_mid(code) {
+			// 		console.log('code: ', code);
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_midmold_at_detail_cutting'); ?>/" + code,
+			// 			type: 'GET',
+			// 			dataType: 'json',
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(retVal) {
+
+			// 			if (retVal == 0) {
+			// 				console.log('retVal: ', retVal);
+			// 				Swal.fire({
+			// 					type: 'warning',
+			// 					title: 'Warning!',
+			// 					text: 'This BARCODE not found!',
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				check_barcode_mid1(code);
+			// 			}
+			// 		});
+			// 	}
+
+			// 	function check_barcode_mid1(c) {
+			// 		console.log('c :', c);
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_midmold_barcode'); ?>/" + c,
+			// 			type: "GET",
+			// 			dataType: "json",
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(dt) {
+			// 			if (dt == 0) {
+			// 				Swal.fire({
+			// 					type: "warning",
+			// 					title: "Warning",
+			// 					text: "This barcode already scanned!",
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				// save_input_molding(dt);
+			// 				checkOrc(dt);
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function check_barcode_linning(code) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_linningmold_at_detail_cutting'); ?>/" + code,
+			// 			type: 'GET',
+			// 			dataType: 'json',
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(retVal) {
+			// 			if (retVal == 0) {
+			// 				Swal.fire({
+			// 					type: 'warning',
+			// 					title: 'Warning!',
+			// 					text: 'This BARCODE not found!',
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				check_barcode_linning1(code);
+			// 			}
+			// 		});
+			// 	}
+
+			// 	function check_barcode_linning1(c) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_check_linningmold_barcode'); ?>/" + c,
+			// 			type: "GET",
+			// 			dataType: "json",
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(dt) {
+			// 			console.log('dt: ', dt);
+			// 			if (dt == 0) {
+			// 				Swal.fire({
+			// 					type: "warning",
+			// 					title: "Warning",
+			// 					text: "This barcode already scanned!",
+			// 					showConfirmButton: false,
+			// 					timer: 1750
+			// 				});
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 			} else {
+			// 				// save_input_molding(dt);
+			// 				checkOrc(dt);
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function checkOrc(data) {
+			// 		var dt = {
+			// 			'orc': data.orc,
+			// 			'no_bundle': data.no_bundle
+			// 		};
+
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_cek_by_orc_nobundle'); ?>",
+			// 			type: "POST",
+			// 			data: {
+			// 				'dataStr': dt
+			// 			},
+			// 			dataType: "json",
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(retVal) {
+			// 			console.log('last query :', retVal);
+			// 			if (retVal == 0) {
+			// 				save_input_molding(data);
+			// 			} else {
+			// 				update_detail_input_molding(data);
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function save_input_molding(data) {
+
+			// 		var dataStr = {
+			// 			'orc': data.orc,
+			// 			'style': data.style,
+			// 			'color': data.color,
+			// 		};
+
+			// 		$.ajax({
+			// 			url: '<//?php echo site_url("InputMolding/ajax_save"); ?>',
+			// 			data: {
+			// 				'dataStr': dataStr
+			// 			},
+			// 			method: 'post',
+			// 			dataType: 'json',
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(id_inserted) {
+			// 			if (id_inserted > 0) {
+			// 				var brcode = $('#barcode_input_molding').val()
+			// 				saveDetail(data, brcode, id_inserted);
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function update_detail_input_molding(dt) {
+			// 		var dataStr = {
+			// 			'orc': dt.orc,
+			// 			'no_bundle': dt.no_bundle
+			// 		};
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_get_by_orc_nobundle'); ?>",
+			// 			type: "POST",
+			// 			data: {
+			// 				"dataStr": dataStr
+			// 			},
+			// 			dataType: "json",
+			// 			timeout: 1000,
+			// 			error: function(request, status, err) {
+			// 				if (status == "timeout") {
+			// 					$.ajax(this);
+			// 				}
+			// 			}
+			// 		}).done(function(d) {
+			// 			if (d != null) {
+			// 				var kode = $('#barcode_input_molding').val();
+			// 				updateDetail(d, kode);
+			// 			}
+			// 		});
+
+			// 	}
+
+			// 	function updateDetail(d, kode) {
+			// 		var prfx = kode.charAt(0);
+
+			// 		switch (prfx) {
+			// 			case "O":
+			// 				updateOuterMold(d, kode);
+			// 				break;
+			// 			case "M":
+			// 				updateMidMold(d, kode);
+			// 				break;
+			// 			case "L":
+			// 				updateLinningMold(d, kode);
+			// 				break;
+			// 		}
+			// 	}
+
+			// 	function updateOuterMold(data, code) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForOuterMoldSAM;
+
+			// 		var ajaxGetOuterMoldSAM;
+
+			// 		var outerMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+
+			// 			}),
+			// 			ajaxGetOuterMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForOuterMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_outermold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForOuterMoldSAM': dataForOuterMoldSAM
+			// 					},
+			// 					dataType: 'json',
+			// 					timeout: 1000,
+			// 					error: function(request, status, err) {
+			// 						if (status == "timeout") {
+			// 							$.ajax(this);
+			// 						}
+			// 					}
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetOuterMoldSAM.done(function(d) {
+			// 			// outerMoldSAM = d.outer_sam;
+			// 			outerMoldSAM = d.total_mold_sam;
+			// 			var dataOuterMold = {
+			// 				'id_input_molding': data.id_input_molding,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'outermold_sam': outerMoldSAM,
+			// 				'outermold_barcode': code
+			// 			}
+			// 			// insertOuterMold(dataOuterMold);
+			// 			$.ajax({
+			// 				url: "<//?php echo site_url('InputMolding/ajax_update_outer_mold'); ?>",
+			// 				type: "POST",
+			// 				data: {
+			// 					'dataOuterMold': dataOuterMold
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}).done(function(dt) {
+			// 				if (dt > 0) {
+			// 					Swal.fire({
+			// 						type: 'info',
+			// 						title: 'Update Data Molding Success!!',
+			// 						showConfirmButton: false,
+			// 						timer: 1500
+			// 					});
+
+			// 					$('#barcode_input_molding').val('');
+			// 					$('#barcode_input_molding').focus();
+			// 					reload_table();
+			// 				}
+			// 			})
+			// 		});
+			// 	}
+
+			// 	function updateMidMold(data, code) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForMidMoldSAM;
+
+			// 		var ajaxGetMidMoldSAM;
+
+			// 		var midMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}),
+			// 			ajaxGetMidMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForMidMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_midmold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForMidMoldSAM': dataForMidMoldSAM
+			// 					},
+			// 					dataType: 'json',
+			// 					timeout: 1000,
+			// 					error: function(request, status, err) {
+			// 						if (status == "timeout") {
+			// 							$.ajax(this);
+			// 						}
+			// 					}
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetMidMoldSAM.done(function(d) {
+			// 			midMoldSAM = d.mid_sam;
+			// 			console.log('data.id_input_molding :', data.id_input_molding);
+			// 			var dataMidMold = {
+			// 				'id_input_molding': data.id_input_molding,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'mildmold_sam': midMoldSAM,
+			// 				'midmold_barcode': code
+			// 			}
+			// 			// insertOuterMold(dataOuterMold);
+			// 			$.ajax({
+			// 				url: "<//?php echo site_url('InputMolding/ajax_update_mid_mold'); ?>",
+			// 				type: "POST",
+			// 				data: {
+			// 					'dataMidMold': dataMidMold
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}).done(function(dt) {
+			// 				if (dt > 0) {
+			// 					Swal.fire({
+			// 						type: 'info',
+			// 						title: 'Update Data Molding Success!!',
+			// 						showConfirmButton: false,
+			// 						timer: 1500
+			// 					});
+
+			// 					$('#barcode_input_molding').val('');
+			// 					$('#barcode_input_molding').focus();
+			// 					reload_table();
+			// 				}
+			// 			})
+			// 		});
+			// 	}
+
+			// 	function updateLinningMold(data, code) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForLinningMoldSAM;
+
+			// 		var ajaxGetLinningMoldSAM;
+
+			// 		var linningMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}),
+			// 			ajaxGetLinningMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForLinningMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+
+
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_linningmold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForLinningMoldSAM': dataForLinningMoldSAM
+			// 					},
+			// 					dataType: 'json',
+			// 					timeout: 1000,
+			// 					error: function(request, status, err) {
+			// 						if (status == "timeout") {
+			// 							$.ajax(this);
+			// 						}
+			// 					}
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetLinningMoldSAM.done(function(d) {
+			// 			linningMoldSAM = d.linning_sam;
+			// 			var dataLinningMold = {
+			// 				'id_input_molding': data.id_input_molding,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'mildmold_sam': linningMoldSAM,
+			// 				'linningmold_barcode': code
+			// 			}
+			// 			// insertOuterMold(dataOuterMold);
+			// 			$.ajax({
+			// 				url: "<//?php echo site_url('InputMolding/ajax_update_linning_mold'); ?>",
+			// 				type: "POST",
+			// 				data: {
+			// 					'dataLinningMold': dataLinningMold
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}).done(function(dt) {
+			// 				if (dt > 0) {
+			// 					Swal.fire({
+			// 						type: 'info',
+			// 						title: 'Update Data Molding Success!!',
+			// 						showConfirmButton: false,
+			// 						timer: 1500
+			// 					});
+
+			// 					$('#barcode_input_molding').val('');
+			// 					$('#barcode_input_molding').focus();
+			// 					reload_table();
+			// 				}
+			// 			})
+			// 		});
+			// 	}
+
+			// 	function saveDetail(dt, b, idInputMolding) {
+			// 		var preffix = b.charAt(0);
+
+			// 		switch (preffix) {
+			// 			case "O":
+			// 				saveOuterMold(dt, b, idInputMolding);
+			// 				break;
+			// 			case "M":
+			// 				saveMidMold(dt, b, idInputMolding);
+			// 				break;
+			// 			case "L":
+			// 				saveLinningMold(dt, b, idInputMolding);
+			// 				break;
+			// 		}
+			// 	}
+
+			// 	function saveOuterMold(data, bar, id) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForOuterMoldSAM;
+
+			// 		var ajaxGetOuterMoldSAM;
+
+			// 		var outerMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}),
+			// 			ajaxGetOuterMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForOuterMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+			// 				console.log('dataForOuterMoldSAM: ', dataForOuterMoldSAM);
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_outermold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForOuterMoldSAM': dataForOuterMoldSAM
+			// 					},
+			// 					dataType: 'json',
+			// 					timeout: 1000,
+			// 					error: function(request, status, err) {
+			// 						if (status == "timeout") {
+			// 							$.ajax(this);
+			// 						}
+			// 					}
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetOuterMoldSAM.done(function(d) {
+			// 			outerMoldSAM = d.outer_sam;
+			// 			var dataOuterMold = {
+			// 				'id_input_molding': id,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'outermold_sam': outerMoldSAM,
+			// 				'outermold_barcode': bar
+			// 			}
+			// 			insertOuterMold(dataOuterMold);
+			// 		});
+			// 	}
+
+			// 	function saveMidMold(data, bar, id) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForMidMoldSAM;
+
+			// 		var ajaxGetMidMoldSAM;
+
+			// 		var midMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json',
+			// 				timeout: 1000,
+			// 				error: function(request, status, err) {
+			// 					if (status == "timeout") {
+			// 						$.ajax(this);
+			// 					}
+			// 				}
+			// 			}),
+			// 			ajaxGetMidMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForMidMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+			// 				console.log('dataForMidMoldSAM: ', dataForMidMoldSAM);
+			// 				// console.log('dataForCuttingSAM: ', dataForCuttingSAM);
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_midmold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForMidMoldSAM': dataForMidMoldSAM
+			// 					},
+			// 					dataType: 'json'
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetMidMoldSAM.done(function(d) {
+			// 			midMoldSAM = d.mid_sam;
+			// 			var dataMidMold = {
+			// 				'id_input_molding': id,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'midmold_sam': midMoldSAM,
+			// 				'midmold_barcode': bar
+			// 			}
+			// 			// console.log('dataCuttingDetail: ', dataCuttingDetail);
+			// 			insertMidMold(dataMidMold);
+			// 		});
+			// 	}
+
+			// 	function saveLinningMold(data, bar, id) {
+			// 		var color = data.color;
+			// 		var groupSize;
+
+			// 		if (color.includes("BLACK") == true) {
+			// 			colorGroup = "Black";
+			// 		} else if (color.includes("WHITE") == true) {
+			// 			colorGroup = "White";
+			// 		} else if (color.includes("BLACK") != true && color.includes("WHITE") != true) {
+			// 			colorGroup = "color"
+			// 		}
+
+			// 		var style = data.style;
+
+			// 		var ajaxGetGroupSize;
+
+			// 		var dataForLinningMoldSAM;
+
+			// 		var ajaxGetLinningMoldSAM;
+
+			// 		var linningMoldSAM;
+
+			// 		ajaxGetGroupSize = $.ajax({
+			// 				url: '<//?php echo site_url('InputMolding/ajax_get_by_size'); ?>',
+			// 				type: 'POST',
+			// 				data: {
+			// 					'dataSize': data.size
+			// 				},
+			// 				dataType: 'json'
+			// 			}),
+			// 			ajaxGetLinningMoldSAM = ajaxGetGroupSize.then(function(dt) {
+			// 				groupSize = dt.group;
+
+			// 				dataForLinningMoldSAM = {
+			// 					'style': style,
+			// 					'color': colorGroup,
+			// 					'grup_size': groupSize
+			// 				};
+			// 				// console.log('dataForCuttingSAM: ', dataForCuttingSAM);
+			// 				return $.ajax({
+			// 					url: '<//?php echo site_url("InputMolding/ajax_get_Linningmold_sam"); ?>',
+			// 					type: 'POST',
+			// 					data: {
+			// 						'dataForLinningMoldSAM': dataForLinningMoldSAM
+			// 					},
+			// 					dataType: 'json'
+			// 				});
+
+			// 			});
+
+			// 		ajaxGetLinningMoldSAM.done(function(d) {
+			// 			linningMoldSAM = d.linning_sam;
+			// 			var dataLinningMold = {
+			// 				'id_input_molding': id,
+			// 				'no_bundle': data.no_bundle,
+			// 				'size': data.size,
+			// 				'group_size': groupSize,
+			// 				'qty_pcs': data.qty_pcs,
+			// 				'linningmold_sam': linningMoldSAM,
+			// 				'linningmold_barcode': bar
+			// 			}
+			// 			// console.log('dataCuttingDetail: ', dataCuttingDetail);
+			// 			insertLinningMold(dataLinningMold);
+			// 		});
+			// 	}
+
+			// 	function insertOuterMold(data) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_save_outer_mold'); ?>",
+			// 			type: "POST",
+			// 			data: {
+			// 				'dataOuterMold': data
+			// 			},
+			// 			dataType: 'json',
+			// 		}).done(function(dt) {
+			// 			if (dt > 0) {
+			// 				Swal.fire({
+			// 					type: 'info',
+			// 					title: 'Save Data Success!!',
+			// 					showConfirmButton: false,
+			// 					timer: 1500
+			// 				});
+
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 				reload_table();
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function insertMidMold(data) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_save_mid_mold'); ?>",
+			// 			type: "POST",
+			// 			data: {
+			// 				'dataMidMold': data
+			// 			},
+			// 			dataType: 'json',
+			// 		}).done(function(dt) {
+			// 			if (dt > 0) {
+			// 				Swal.fire({
+			// 					type: 'info',
+			// 					title: 'Save Data Success!!',
+			// 					showConfirmButton: false,
+			// 					timer: 1500
+			// 				});
+
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 				reload_table();
+			// 			}
+			// 		})
+			// 	}
+
+			// 	function insertLinningMold(data) {
+			// 		$.ajax({
+			// 			url: "<//?php echo site_url('InputMolding/ajax_save_linning_mold'); ?>",
+			// 			type: "POST",
+			// 			data: {
+			// 				'dataLinningMold': data
+			// 			},
+			// 			dataType: 'json',
+			// 		}).done(function(dt) {
+			// 			if (dt > 0) {
+			// 				Swal.fire({
+			// 					type: 'info',
+			// 					title: 'Save Data Success!!',
+			// 					showConfirmButton: false,
+			// 					timer: 1500
+			// 				});
+
+			// 				$('#barcode_input_molding').val('');
+			// 				$('#barcode_input_molding').focus();
+			// 				reload_table();
+			// 			}
+			// 		})
+			// 	}
 
 			function reload_table() {
 				table.ajax.reload(null, false);

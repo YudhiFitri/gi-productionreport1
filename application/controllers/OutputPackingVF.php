@@ -5,7 +5,7 @@ class OutputPackingVF extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('Packing/output_packing_vf_view');
+		$this->load->view('packing/output_packing_vf_view');
 	}
 
 	public function ajax_get_all_lines()
