@@ -185,7 +185,7 @@
 				"order": [],
 				"distroy": true,
 				"ajax": {
-					"url": "<?php echo site_url('outputcutting/ajax_list'); ?>",
+					"url": "<?php echo site_url('OutputCutting/ajax_list'); ?>",
 					"type": "POST",
 					"dataType": "json",
 					// "dataSrc" : "",
@@ -197,7 +197,7 @@
 			function loadLine() {
 				$('#line').empty();
 				$.ajax({
-					url: '<?php echo site_url("outputcutting/ajax_get_all_line"); ?>',
+					url: '<?php echo site_url("OutputCutting/ajax_get_all_line"); ?>',
 					type: 'GET',
 					dataType: 'json',
 					success: function(dt) {
@@ -227,7 +227,7 @@
 			function check_barcode(barcode) {
 				console.log('barcode: ', barcode);
 				$.ajax({
-					url: '<?php echo site_url("outputcutting/ajax_check_by_barcode"); ?>/' + barcode,
+					url: '<?php echo site_url("OutputCutting/ajax_check_by_barcode"); ?>/' + barcode,
 					type: 'GET',
 					dataType: 'json'
 				}).done(function(dt) {
@@ -300,7 +300,7 @@
 				var dtInputSewing;
 
 				ajaxGetGroupSize = $.ajax({
-						url: '<?php echo site_url('outputcutting/ajax_get_by_size'); ?>',
+						url: '<?php echo site_url('OutputCutting/ajax_get_by_size'); ?>',
 						type: 'POST',
 						data: {
 							'dataSize': size
@@ -318,7 +318,7 @@
 						// console.log('dataForCuttingSAM: ', dataForCuttingSAM);
 						console.log('dataForSewingSAM: ', dataForSewingSAM);
 						return $.ajax({
-							url: '<?php echo site_url("outputcutting/ajax_get_sewing_sam"); ?>',
+							url: '<?php echo site_url("OutputCutting/ajax_get_sewing_sam"); ?>',
 							type: 'POST',
 							data: {
 								'dataForSewingSAM': dataForSewingSAM
@@ -358,7 +358,7 @@
 
 				function insertInputSewing(data) {
 					$.ajax({
-						url: '<?php echo site_url("outputcutting/ajax_save"); ?>',
+						url: '<?php echo site_url("OutputCutting/ajax_save"); ?>',
 						data: {
 							'dataStr': data
 						},
