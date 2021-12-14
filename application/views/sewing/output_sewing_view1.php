@@ -815,7 +815,7 @@
 							Swal.fire({
 								type: 'warning',
 								title: 'Warning',
-								html: `<p><strong>Barcode ini bukan untuk zona ${groupLocation}</strong></p>`,
+								html: `<p><strong>Barcode ini bukan untuk line ${groupLocation}</strong></p>`,
 								showConfirmButton: false,
 								timer: 1750
 							});
