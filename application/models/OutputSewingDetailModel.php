@@ -8,7 +8,7 @@ class OutputSewingDetailModel extends CI_Model
 
 
 	// public function save($idOutputSewing)
-	public function save($data)	
+	public function save($data)
 	{
 
 		$this->db->trans_start();
@@ -28,7 +28,8 @@ class OutputSewingDetailModel extends CI_Model
 				'tgl_ass' => date('Y-m-d'),
 				'qty' => $data['qtyPcsActual'],
 				'assembly_sam_result' => $data['assembly_sam_result'],
-				'kode_barcode' => $data['kode_barcode']
+				'kode_barcode' => $data['kode_barcode'],
+				'reject' => 0
 			];
 			$this->db->insert($this->table, $dataForOutputSewingDetail);
 
@@ -58,9 +59,9 @@ class OutputSewingDetailModel extends CI_Model
 			$this->db->set('tgl_ass', date('Y-m-d'));
 			// $this->db->set('assembly_sam_result', 'assembly_sam_result + ' . );
 			$this->db->where('id_output_sewing_detail', $rowOutputSewingDetail->id_output_sewing_detail);
-			$this->db->update('output_sewing_detail');			
+			$this->db->update('output_sewing_detail');
 			// if ($this->db->replace($this->table, $dataForOutputSewingDetail)) {
-			if($this->db->affected_rows() > 0){
+			if ($this->db->affected_rows() > 0) {
 				$dataOutputSewingDetailLog = [
 					'id_output_sewing_detail' => $rowOutputSewingDetail->id_output_sewing_detail,
 					'tgl' => date('Y-m-d H:i:s'),
@@ -81,10 +82,10 @@ class OutputSewingDetailModel extends CI_Model
 			$this->db->set('qty', $qtyCuttingDetail);
 			$this->db->where('kode_barcode', $kode_barcode);
 			$this->db->update($this->table);
-		}		
+		}
 		$this->db->trans_complete();
 
-		return $this->db->trans_status();		
+		return $this->db->trans_status();
 
 		// if (isset($_POST['dataStr'])) {
 
@@ -326,7 +327,7 @@ class OutputSewingDetailModel extends CI_Model
 					return $rowsAffectedOutputSewing;
 				}
 			}
-		}		
+		}
 	}
 
 	// private function _insertOutputSewingDetail($dt)

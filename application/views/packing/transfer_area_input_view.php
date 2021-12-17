@@ -50,7 +50,7 @@
 		input.valid.success-alert {
 			border: 2px solid #4CAF50;
 			color: green;
-		}		
+		}
 	</style>
 </head>
 
@@ -90,7 +90,7 @@
 			<section class="content">
 				<div class="container-fluid">
 					<div class="row">
-					<div class="col-12">
+						<div class="col-12">
 							<div class="card card-info card-outline">
 								<div class="card-header d-flex p-0">
 									<h3 class="card-title p-3">Finish Good (Scan Input)</h3>
@@ -230,7 +230,7 @@
 												</div>
 											</div>
 											<hr />
-											<button type="button" id="btnInputManual" class="btn btn-info float-right"><i class="fa fa-user"></i>&nbsp;Input Manual</button>											
+											<button type="button" id="btnInputManual" class="btn btn-info float-right"><i class="fa fa-user"></i>&nbsp;Input Manual</button>
 											<button type="button" id="btnUpdatePcsBox" class="btn btn-success" disabled><i class="fa fa-upload"></i>&nbsp;Update</button>
 											<button type="button" id="btnCancelPcsBox" class="btn btn-warning"><i class="fa fa-close"></i>&nbsp;Cancel</button>
 											<hr>
@@ -394,7 +394,7 @@
 								</form>
 							</div>
 						</div>
-					</div>					
+					</div>
 				</div>
 
 				<!--end of packing modal-->
@@ -430,7 +430,7 @@
 	<script src="<?php echo base_url('plugins/datatables/extensions/jszip/js/jszip.min.js'); ?>"></script>
 	<script src="<?php echo base_url('plugins/datatables/extensions/buttonprint/js/buttons.print.min.js'); ?>"></script>
 
-	<script src="<?php echo base_url('plugins/jquery-validation/jquery.validate.min.js'); ?>"></script>	
+	<script src="<?php echo base_url('plugins/jquery-validation/jquery.validate.min.js'); ?>"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -438,7 +438,8 @@
 			// const packingCodeRegex = /ctky/i;
 			const packingCodeRegex = /g\d{1}-\d{2}\w{1}\d{1}\d{1}\d{1}\w{1}\-\d{1}?/i //regex untuk barcode packing
 
-			var barcodeOp, barcodePacking, noUrut = 0,noUrutPcs = 0,
+			var barcodeOp, barcodePacking, noUrut = 0,
+				noUrutPcs = 0,
 				findDoublePackingBarcode = false;
 
 			$('#btnNewInputTA').click(function() {
@@ -528,7 +529,7 @@
 						pageTotal + ' (' + total + ')'
 					);
 				}
-			});			
+			});
 
 			var tableInputTransferArea = $('#tableInputTransferArea').DataTable({
 				dom: 'flBrtip',
@@ -994,7 +995,7 @@
 				$('#pcs').val('0');
 				$('#new_pcs').val('0');
 				$('#barcodePackingPcs').val('');
-			}	
+			}
 
 			$('#btnInputManual').click(function() {
 				$('#modalInputFG').modal('show');
@@ -1142,7 +1143,7 @@
 					return false;
 
 				}
-			});					
+			});
 
 		})
 	</script>
