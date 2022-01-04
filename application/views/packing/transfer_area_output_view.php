@@ -124,12 +124,6 @@
 												</tr>
 											</tfoot>
 										</table>
-										<div class="form-group row">
-											<label class="mx-1">Tanggal Dikeluarkan:</label>
-											<input type="date" id="tglOut" class="form-control form-control-sm col-2">
-											<button type="button" id="btnKeluarkan" class="btn btn-outline-success mx-4" disabled><i class="fa fa-logout"></i>&nbsp;Keluarkan</button>
-										</div>
-
 									</div>
 								</div>
 							</div>
@@ -296,6 +290,58 @@
 								getSelectedTAIn();
 							}
 						},
+						{
+							text: 'Keluarkan',
+							action: () => {
+								if (selectedTAInRows == null) {
+									Swal.fire({
+										type: 'warning',
+										text: 'Peringatan!',
+										title: 'Pilih data yang akan dikeluarkan terlebih dahulu!',
+										showConfirmButton: true
+									});
+									return false;
+								}
+
+								let dataForTransferAreaOut = [];
+
+								$.each(selectedTAInRows, function(i, itm) {
+									dataForTransferAreaOut.push({
+										'id_transfer_area': itm.id_transfer_area,
+										// 'tgl_out': dateSelected + ` ${time}`,
+										'status': 'out'
+									});
+								});
+
+								$.ajax({
+									type: 'POST',
+									url: '<?= site_url("TransferArea/ajax_update_batch_transfer_area"); ?>',
+									data: {
+										'dataForTransferAreaOut': dataForTransferAreaOut
+									},
+									dataType: 'json'
+								}).done(function(rowAff) {
+									if (rowAff > 0) {
+										Swal.fire({
+											type: 'success',
+											title: 'Berhasil',
+											text: 'Data berhasil diUpdate',
+											timer: 750,
+											showCancelButton: false,
+											onAfterClose: () => {
+												tableTransferAreaIn.rows({
+													page: 'all'
+												}).deselect();
+												// tableTransferAreaIn.clear();
+												$('#orc').select2('open');
+												loadTableOut();
+												tableTransferAreaIn.ajax.reload(null, false);
+											}
+										})
+									}
+								})
+							}
+						}
 					],
 					scrollY: '200px',
 					scrollCollapse: true,
@@ -396,7 +442,6 @@
 				selectedTAInRows = tableTransferAreaIn.rows('.selected').data();
 				console.log(selectedTAInRows.length);
 
-				$('#btnKeluarkan').prop('disabled', selectedTAInRows.length == 0);
 			}
 
 			var tableTransferAreaOut = $('#tableTransferAreaOut').DataTable({
@@ -477,55 +522,6 @@
 				open(`<?= site_url("TransferArea/ajax_show_detail_out_by_orc"); ?>/${selectedRow.orc}`, '_self');
 
 			});
-
-			$('#btnKeluarkan').click(function() {
-
-				console.log('selectedTAInRows: ', selectedTAInRows);
-				let dataForTransferAreaOut = [];
-				const dateFormat = 'YYYY-MM-DD';
-				var date = new Date($('#tglOut').val());
-				var dateNow = new Date();
-				var time = dateNow.getHours() + ':' + dateNow.getMinutes() + ":" + dateNow.getSeconds();
-				console.log('time:', time);
-				var dateSelected = moment(date).format(dateFormat);
-
-				$.each(selectedTAInRows, function(i, itm) {
-					dataForTransferAreaOut.push({
-						'id_transfer_area': itm.id_transfer_area,
-						'tgl_out': dateSelected + ` ${time}`,
-						'status': 'out'
-					});
-				});
-
-				$.ajax({
-					type: 'POST',
-					url: '<?= site_url("TransferArea/ajax_update_batch_transfer_area"); ?>',
-					data: {
-						'dataForTransferAreaOut': dataForTransferAreaOut
-					},
-					dataType: 'json'
-				}).done(function(rowAff) {
-					if (rowAff > 0) {
-						Swal.fire({
-							type: 'success',
-							title: 'Berhasil',
-							text: 'Data berhasil diUpdate',
-							timer: 750,
-							showCancelButton: false,
-							onAfterClose: () => {
-								tableTransferAreaIn.rows({
-									page: 'all'
-								}).deselect();
-								// tableTransferAreaIn.clear();
-								$('#orc').select2('open');
-								loadTableOut();
-								tableTransferAreaIn.ajax.reload(null, false);
-								$('#btnKeluarkan').prop('disabled', true);
-							}
-						})
-					}
-				})
-			})
 
 			function loadTableOut() {
 				tableTransferAreaOut.ajax.reload(null, false);

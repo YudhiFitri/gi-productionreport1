@@ -751,11 +751,11 @@
 					cekAtTransferArea();
 
 					function saveToTransferArea() {
-						const dateFormat = 'YYYY-MM-DD HH:mm:ss';
-						var date = new Date();
-						var dateNow = moment(date).format(dateFormat);
+						// const dateFormat = 'YYYY-MM-DD HH:mm:ss';
+						// var date = new Date();
+						// var dateNow = moment(date).format(dateFormat);
 						var dataForTransferArea = {
-							'tgl_in': dateNow,
+							// 'tgl_in': dateNow,
 							'style': outputPackingDetailRst[0].style,
 							'color': outputPackingDetailRst[0].color,
 							'orc': outputPackingDetailRst[0].orc,

@@ -62,9 +62,14 @@ class TransferAreaModel extends CI_Model
 
 	public function save_transfer_area($data)
 	{
+		date_default_timezone_set('Asia/Jakarta');
+
 		$orc = $data['orc'];
 		$row = $this->db->get_where('order', ['orc' => $orc])->row();
 		$data['po'] = $row->so;
+		$data['tgl_in'] = date('Y-m-d H:i:s');
+
+		// print_r($data);
 		$this->db->insert($this->table, $data);
 
 		return $this->db->insert_id();
@@ -97,6 +102,11 @@ class TransferAreaModel extends CI_Model
 
 	public function update_batch_transfer_area($data)
 	{
+		date_default_timezone_set('Asia/Jakarta');
+		foreach ($data as $key => &$val) {
+			$val['tgl_out'] = date('Y-m-d H:i:s');
+			// print_r($d);
+		}
 		// print_r($data);
 		$this->db->update_batch($this->table, $data, 'id_transfer_area');
 
@@ -110,7 +120,7 @@ class TransferAreaModel extends CI_Model
 		$row = $this->db->get_where($this->table, ['orc' => $orc]);
 
 		return $row->row();
-	}	
+	}
 
 	public function update_lokasi($data)
 	{
@@ -120,7 +130,7 @@ class TransferAreaModel extends CI_Model
 
 		return $this->db->affected_rows();
 	}
-	
+
 	public function summary_by_orc($orc)
 	{
 		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
@@ -132,14 +142,14 @@ class TransferAreaModel extends CI_Model
 
 		return $rst->result();
 	}
-	
+
 	public function update_batch_lokasi($data)
 	{
 		$this->db->update_batch($this->table, $data, 'id_transfer_area');
 
 		return $this->db->affected_rows();
 	}
-	
+
 	public function get_all_posisi_orc()
 	{
 		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
@@ -155,7 +165,7 @@ class TransferAreaModel extends CI_Model
 
 		return $result->result();
 	}
-	
+
 	public function get_by_barcode($barcode)
 	{
 		$row = $this->db->get_where($this->table, ['barcode' => $barcode]);
@@ -181,7 +191,7 @@ class TransferAreaModel extends CI_Model
 
 		return $rst->result();
 	}
-	
+
 	public function in_filter_by_orc()
 	{
 		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
@@ -337,7 +347,7 @@ class TransferAreaModel extends CI_Model
 		return $rst->result();
 		// return $this->db->last_query();
 	}
-	
+
 	public function get_all_lines()
 	{
 		$this->db->select('id_line, line, max_box_capacity');
@@ -355,6 +365,5 @@ class TransferAreaModel extends CI_Model
 
 		$rst = $this->db->get($this->table);
 		return $rst->result();
-	}	
-	
+	}
 }
