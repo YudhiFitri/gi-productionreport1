@@ -108,7 +108,7 @@
 											<?php foreach ($data as $d) : ?>
 												<tr>
 													<td><?= $d->id_transfer_area; ?></td>
-													<td><?= date('d-m-Y', strtotime($d->tgl_in)); ?></td>
+													<td><?= date('d-m-Y H:i:s', strtotime($d->tgl_in)); ?></td>
 													<td><?= $d->po; ?></td>
 													<td><?= $d->style; ?></td>
 													<td><?= $d->color; ?></td>
@@ -203,7 +203,7 @@
 	<script src="<?php echo base_url('plugins/datatables/extensions/buttonshtml5/js/buttons.html5.min.js'); ?>"></script>
 	<script src="<?php echo base_url('plugins/datatables/extensions/jszip/js/jszip.min.js'); ?>"></script>
 	<script src="<?php echo base_url('plugins/datatables/extensions/buttonprint/js/buttons.print.min.js'); ?>"></script>
-	
+
 	<script>
 		$(document).ready(function() {
 			var selectedRows = null;
@@ -253,7 +253,7 @@
 						action: function() {
 							open('<?= site_url("TransferArea/transferAreaInput"); ?>', '_self');
 						}
-					},					
+					},
 				],
 				columnDefs: [{
 					targets: [0],
@@ -352,7 +352,7 @@
 								}).every(function(rowIdx, tableLoop, rowLoop) {
 									tableTransferAreaDetailIn.cell(rowIdx, 10).data($('#lineBaru').val());
 								}).draw();
-								
+
 								tableTransferAreaDetailIn.rows({
 									selected: true
 								}).deselect();
